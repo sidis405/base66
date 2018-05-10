@@ -8,8 +8,9 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user', 'category', 'tags')->get();
+        $posts = Post::with('user', 'category', 'tags')->latest()->paginate(15);
 
-        return $posts;
+
+        return view('posts.index', compact('posts'));
     }
 }

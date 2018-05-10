@@ -8,7 +8,8 @@ $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $title,
         'slug' => str_slug($title),
-        'body' => join(' ', $faker->paragraphs(5)),
+        'preview' => $faker->paragraph,
+        'body' => join(' ', $faker->paragraphs(10)),
         'user_id' => factory(App\User::class)->make(),
         'category_id' => factory(App\Category::class)->make(),
     ];
