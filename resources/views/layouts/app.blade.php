@@ -34,18 +34,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li>
-                            <a href="{{ route('posts.index') }}" class="nav-link">Blog</a>
-                        </li>
+                        <li><a href="{{ route('posts.index') }}" class="nav-link">Blog</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+                            <li><a href="{{ route('posts.create') }}" class="nav-link">Create New Post</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -72,6 +72,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10">
+                    @include('layouts.errors')
                     @yield('content')
                 </div>
                 <div class="col-md-2"></div>

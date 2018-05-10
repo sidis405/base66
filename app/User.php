@@ -36,4 +36,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function createPostWithTagsFrom($request)
+    {
+        $post = $this->posts()->create($request->validated());
+
+        $post->attachTags($request);
+
+        return $post;
+    }
 }
