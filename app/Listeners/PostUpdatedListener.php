@@ -4,8 +4,7 @@ namespace App\Listeners;
 
 use App\User;
 use App\Events\PostWasUpdated;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\NotifyAdminPostWasUpdated;
+use App\Jobs\NotifyAdminsOfUpdatedPost;
 
 class PostUpdatedListener
 {
@@ -30,6 +29,6 @@ class PostUpdatedListener
     {
         $admin = User::where('role', 'admin')->first();
 
-        Mail::to($admin)->send(new NotifyAdminPostWasUpdated($admin, $event->post));
+        NotifyAdminsOfUpdatedPost::dispatch($admin, $event->post);
     }
 }
