@@ -1,6 +1,9 @@
 <article>
     <div class="card">
         <div class="card-header">
+
+            <img src="{{ url($post->cover) }}" width="100%">
+
             <h4><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h4>
             <small>by {{ $post->user->name }} on {{ $post->created_at->format('d/m/y H:i') }}</small>
 

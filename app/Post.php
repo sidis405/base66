@@ -13,7 +13,8 @@ class Post extends Model
     //     parent::boot();
 
     //     static::saving(function ($post) {
-    //         $post->user_id = auth()->id();
+    //         // dd($post);
+    //         // $post->user_id = auth()->id();
     //     });
     // }
 
@@ -49,6 +50,16 @@ class Post extends Model
     {
         $this->attributes['title'] = $title;
         $this->attributes['slug'] = str_slug($title);
+    }
+
+    public function setCoverAttribute($cover)
+    {
+        $this->attributes['cover'] = $cover->store('covers');
+    }
+
+    public function getCoverAttribute($cover)
+    {
+        return ($cover) ?? 'covers/default.jpg'; //null coalescence operator
     }
 
     public function attachTags($request)

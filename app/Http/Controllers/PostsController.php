@@ -18,6 +18,11 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::with('user', 'category', 'tags')->latest()->paginate(15);
+
+        if (request()->wantsJson()) {
+            return $posts;
+        }
+
         return view('posts.index', compact('posts'));
     }
 
@@ -37,10 +42,6 @@ class PostsController extends Controller
     public function store(PostRequest $request)
     {
         $post = auth()->user()->createPostWithTagsFrom($request);
-
-        //trova admin
-        //spedire mail
-        //costruire mail
 
         return redirect()->route('posts.show', $post);
     }
